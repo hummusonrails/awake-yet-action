@@ -75,28 +75,28 @@ Toolkit.run(async tools => {
       console.log(JSON.stringify(geocode_data));
       console.log('latitude arr: ' + geocode_data[0]['latitude'] + 'longitude arr: ' + geocode_data[0]['longitude'])
       // Initialize the Timezone library and get the timezone with the lat & long from the Geocoder data
-      let timestamp = 1402629305;
+      let timestamp = Math.floor((new Date()).getTime() / 1000);
       Timezone.data(geocode_data[0]['latitude'], geocode_data[0]['longitude'], timestamp, function (err, tz) {
         // Assign the date and time in the user's location to the date_time variable
         date_time = new Date(tz.local_timestamp * 1000);
         date_string = date_time.toDateString() + ' - ' + date_time.getHours() + ':' + date_time.getMinutes();
         console.log(tz.local_timestamp)
         console.log(date_string)
-      });
-
-      const responseMsg = `
-        Hi there, ${actor}! 👋
-        \n
-        You asked if ${person} was awake yet. I can't tell you about their personal sleeping habits, sadly.\n
-        I can tell you though that the date and time for ${person} is currently:\n
-        ${date_string}\n
-        I hope that helps clarify the matter for you!
-      `;
-      await tools.github.issues.createComment({
-        owner: owner,
-        repo: repo,
-        issue_number: issue_number,
-        body: responseMsg
+      
+        const responseMsg = `
+          Hi there, ${actor}! 👋
+          \n
+          You asked if ${person} was awake yet. I can't tell you about their personal sleeping habits, sadly.\n
+          I can tell you though that the date and time for ${person} is currently:\n
+          ${date_string}\n
+          I hope that helps clarify the matter for you!
+        `;
+        await tools.github.issues.createComment({
+          owner: owner,
+          repo: repo,
+          issue_number: issue_number,
+          body: responseMsg
+        });
       });
     } else {
       // If it is not, formulate a response that lets the questioner know that
