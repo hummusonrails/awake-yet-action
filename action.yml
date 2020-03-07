@@ -1,0 +1,8 @@
+name: Are They Awake Yet?
+description: Ask if a user is awake and find out what the time is in the location they specify in their profile.
+runs:
+  using: docker
+  image: Dockerfile
+branding:
+  icon: clock
+  color: gray-dark
