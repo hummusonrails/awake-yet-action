@@ -1,6 +1,7 @@
 const { Toolkit } = require('actions-toolkit')
 const Geocoder = require('node-geocoder');
-const Timezone = require("@googlemaps/google-maps-services-js").Client;
+const Client = require("@googlemaps/google-maps-services-js").Client;
+const client = new Client({});
 const dotenv = require("dotenv");
 dotenv.config();
 // Create variables for future values
@@ -72,7 +73,7 @@ Toolkit.run(async tools => {
 
       // Initialize the Timezone library and get the timezone with the lat & long from the Geocoder data
       var timestamp = Math.floor((new Date()).getTime() / 1000);
-      var tz = await Timezone.TimeZoneRequest({
+      var tz = await client.timezone({
         params: {
           location: { 
             lat: `${geocode_data[0]['latitude']}`, 
