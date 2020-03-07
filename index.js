@@ -50,7 +50,7 @@ Toolkit.run(async tools => {
     person = question_arr[1].replace(/@/g, '');
     console.log(`HERE IS THE PERSON: ${person}`);
     person_info = (await tools.github.users.getByUsername({
-      person
+      username: person
     })).data;
     console.log(`HERE IS THE PERSON INFO: ${person_info}`);
 
