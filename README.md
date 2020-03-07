@@ -12,7 +12,7 @@ To use this action in your project, please follow the [instructions on GitHub](h
 Once you have your workflow structure set up, you can create a new workflow YAML file inside `/.github/workflows/` that contains the following:
 
 ``` 
-name: Check Inclusive Language
+name: Are They Awake Yet
 on: [issues, pull_request]
 jobs:
   are-they-awake-yet:
