@@ -85,14 +85,14 @@ Toolkit.run(async tools => {
       Timezone.data(geocode_data[0]['latitude'], geocode_data[0]['longitude'], timestamp, function (err, tz) {
         // Assign the date and time in the user's location to the date_time variable
         date_time = new Date(tz.local_timestamp * 1000);
-        date_string = d.toDateString() + ' - ' + d.getHours() + ':' + d.getMinutes();
+        date_string = date_time.toDateString() + ' - ' + d.getHours() + ':' + d.getMinutes();
       });
 
       const responseMsg = `
         Hi there, ${actor}! 👋
         \n
         You asked if ${person} was awake yet. I can't tell you about their personal sleeping habits, sadly.\n
-        I can though tell you that the date and time for ${person} is currently:\n
+        I can tell you though that the date and time for ${person} is currently:\n
         ${date_string}\n
         I hope that helps clarify the matter for you!
       `;
