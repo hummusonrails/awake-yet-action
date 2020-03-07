@@ -7,7 +7,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "actions-toolkit": "^3.0.1"
+    "actions-toolkit": "^3.0.1",
+    "node-geocoder": "^3.25.0",
+    "node-google-timezone": "^0.1.1"
   },
   "devDependencies": {
     "jest": "^25.1.0"
