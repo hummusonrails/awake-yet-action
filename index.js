@@ -47,15 +47,11 @@ Toolkit.run(async tools => {
       body.lastIndexOf('is'),
       body.lastIndexOf('awake?')
     );
-    console.log(`HERE IS THE QUESTION: ${question}`);
     let question_arr = question.split(' ');
-    console.log(`HERE IS THE QUESTION ARRAY: ${question_arr}`);
     person = question_arr[1].replace(/@/g, '');
-    console.log(`HERE IS THE PERSON: ${person}`);
     person_info = (await tools.github.users.getByUsername({
       username: person
     })).data;
-    console.log(`HERE IS PERSON ARRAY INFO: ${JSON.stringify(person_info)}`);
 
     // Get the location specified in their profile
     user_location = person_info.location;
@@ -77,13 +73,15 @@ Toolkit.run(async tools => {
       let geocoder = Geocoder(options);
       let geocode_data = (await geocoder.geocode(`${user_location}`));
       console.log(JSON.stringify(geocode_data));
-      console.log('latitude: ' + geocode_data.latitude + 'longitude: ' + geocode_data.longitude)
+      console.log('latitude arr: ' + geocode_data[0]['latitude'] + 'longitude arr: ' + geocode_data[0]['longitude'])
       // Initialize the Timezone library and get the timezone with the lat & long from the Geocoder data
       let timestamp = 1402629305;
       Timezone.data(geocode_data[0]['latitude'], geocode_data[0]['longitude'], timestamp, function (err, tz) {
         // Assign the date and time in the user's location to the date_time variable
         date_time = new Date(tz.local_timestamp * 1000);
         date_string = date_time.toDateString() + ' - ' + date_time.getHours() + ':' + date_time.getMinutes();
+        console.log(tz.local_timestamp)
+        console.log(date_string)
       });
 
       const responseMsg = `
