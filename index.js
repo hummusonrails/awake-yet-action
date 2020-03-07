@@ -73,10 +73,8 @@ Toolkit.run(async tools => {
         apiKey: process.env.GOOGLE_API_KEY,
         formatter: null
       };
-      console.log(options);
       // Initialize the Geocoder with the options and get the data
       let geocoder = Geocoder(options);
-      console.log(`GEOCODER CLIENT: ${JSON.stringify(geocoder)}`);
       let geocode_data = (await geocoder.geocode(`${user_location}`));
       console.log(JSON.stringify(geocode_data));
       console.log('latitude: ' + geocode_data.latitude + 'longitude: ' + geocode_data.longitude)
