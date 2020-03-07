@@ -75,8 +75,8 @@ Toolkit.run(async tools => {
       console.log(options);
       // Initialize the Geocoder with the options and get the data
       let geocoder = Geocoder(options);
-      console.log(`GEOCODER CLIENT: ${geocoder}`);
-      let geocode_data = (await geocoder.geocode(`${user_location}`)).data;
+      console.log(`GEOCODER CLIENT: ${JSON.stringify(geocoder)}`);
+      let geocode_data = (await geocoder.geocode(`${user_location}`));
       console.log(JSON.stringify(geocode_data));
       // Initialize the Timezone library and get the timezone with the lat & long from the Geocoder data
       let timestamp = 1402629305;
