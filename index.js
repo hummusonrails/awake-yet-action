@@ -1,6 +1,6 @@
 const { Toolkit } = require('actions-toolkit')
 const Geocoder = require('node-geocoder');
-const Timezone = require('node-google-timezone');
+const Timezone = require("@googlemaps/google-maps-services-js").Client;
 const dotenv = require("dotenv");
 dotenv.config();
 // Create variables for future values
@@ -69,15 +69,26 @@ Toolkit.run(async tools => {
       // Initialize the Geocoder with the options and get the data
       var geocoder = Geocoder(options);
       var geocode_data = (await geocoder.geocode(`${user_location}`));
+
       // Initialize the Timezone library and get the timezone with the lat & long from the Geocoder data
       var timestamp = Math.floor((new Date()).getTime() / 1000);
-      Timezone.data(geocode_data[0]['latitude'], geocode_data[0]['longitude'], timestamp, function (err, tz) {
-        // Assign the date and time in the user's location to the date_time variable
-        date_time = new Date(tz.local_timestamp * 1000);
-        date_string = date_time.toDateString() + ' - ' + date_time.getHours() + ':' + date_time.getMinutes();
-        console.log(tz.local_timestamp)
-        console.log(date_string)
-      });
+      var tz = await Timezone.timezone({
+        params: {
+          location: { 
+            lat: `${geocode_data[0]['latitude']}`, 
+            lng: `${geocode_data[0]['longitude']}`
+          },
+          timestamp: timestamp
+        }
+      }).data;
+      console.log(`tz: ${JSON.stringify(tz)}`);
+
+      // Assign the date and time in the user's location to the date_time variable
+      date_time = new Date(tz.local_timestamp * 1000);
+      date_string = date_time.toDateString() + ' - ' + date_time.getHours() + ':' + date_time.getMinutes();
+      console.log(tz.local_timestamp)
+      console.log(date_string)
+
       const responseMsg = `
         Hi there, ${actor}! 👋
         \n

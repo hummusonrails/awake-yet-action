@@ -7,10 +7,10 @@
     "test": "jest"
   },
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^2.1.2",
     "actions-toolkit": "^3.0.1",
-    "node-geocoder": "^3.25.0",
-    "node-google-timezone": "^0.1.1",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "node-geocoder": "^3.25.0"
   },
   "devDependencies": {
     "jest": "^25.1.0"
