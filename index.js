@@ -72,7 +72,7 @@ Toolkit.run(async tools => {
 
       // Initialize the Timezone library and get the timezone with the lat & long from the Geocoder data
       var timestamp = Math.floor((new Date()).getTime() / 1000);
-      var tz = await Timezone.timezone({
+      var tz = await Timezone.TimeZoneRequest({
         params: {
           location: { 
             lat: `${geocode_data[0]['latitude']}`, 
