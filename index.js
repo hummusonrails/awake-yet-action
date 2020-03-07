@@ -4,20 +4,17 @@ const Timezone = require('node-google-timezone');
 const dotenv = require("dotenv");
 dotenv.config();
 // Create variables for future values
-let user = '';
-let person = '';
-let person_info = '';
-let user_location = '';
-let body = '';
-let issue_number = '';
-let date_time = '';
-let date_string = '';
+var user = '';
+var person = '';
+var person_info = '';
+var user_location = '';
+var body = '';
+var issue_number = '';
+var date_time = '';
+var date_string = '';
 
 // Run your GitHub Action!
 Toolkit.run(async tools => {
-  // Print out the context
-  // console.log(tools.context);
-
   // Assign repo data to variables
   const owner = tools.context.payload.repository.owner.login;
   const repo = tools.context.payload.repository.name;
@@ -43,11 +40,11 @@ Toolkit.run(async tools => {
   body = body.toLowerCase();
   if (body.includes('is') && body.includes('awake?')) {
     // If it does, get user info
-    let question = body.substring(
+    var question = body.substring(
       body.lastIndexOf('is'),
       body.lastIndexOf('awake?')
     );
-    let question_arr = question.split(' ');
+    var question_arr = question.split(' ');
     person = question_arr[1].replace(/@/g, '');
     person_info = (await tools.github.users.getByUsername({
       username: person
@@ -63,40 +60,37 @@ Toolkit.run(async tools => {
 
       // Get the time in that location, first get lat and long then get the time for those coordinates
       // Set options for the Geocoder
-      let options = {
+      var options = {
         provider: 'google',
         httpAdapter: 'https',
         apiKey: process.env.GOOGLE_API_KEY,
         formatter: null
       };
       // Initialize the Geocoder with the options and get the data
-      let geocoder = Geocoder(options);
-      let geocode_data = (await geocoder.geocode(`${user_location}`));
-      console.log(JSON.stringify(geocode_data));
-      console.log('latitude arr: ' + geocode_data[0]['latitude'] + 'longitude arr: ' + geocode_data[0]['longitude'])
+      var geocoder = Geocoder(options);
+      var geocode_data = (await geocoder.geocode(`${user_location}`));
       // Initialize the Timezone library and get the timezone with the lat & long from the Geocoder data
-      let timestamp = Math.floor((new Date()).getTime() / 1000);
+      var timestamp = Math.floor((new Date()).getTime() / 1000);
       Timezone.data(geocode_data[0]['latitude'], geocode_data[0]['longitude'], timestamp, function (err, tz) {
         // Assign the date and time in the user's location to the date_time variable
         date_time = new Date(tz.local_timestamp * 1000);
         date_string = date_time.toDateString() + ' - ' + date_time.getHours() + ':' + date_time.getMinutes();
         console.log(tz.local_timestamp)
         console.log(date_string)
-      
-        const responseMsg = `
-          Hi there, ${actor}! 👋
-          \n
-          You asked if ${person} was awake yet. I can't tell you about their personal sleeping habits, sadly.\n
-          I can tell you though that the date and time for ${person} is currently:\n
-          ${date_string}\n
-          I hope that helps clarify the matter for you!
-        `;
-        await tools.github.issues.createComment({
-          owner: owner,
-          repo: repo,
-          issue_number: issue_number,
-          body: responseMsg
-        });
+      });
+      const responseMsg = `
+        Hi there, ${actor}! 👋
+        \n
+        You asked if ${person} was awake yet. I can't tell you about their personal sleeping habits, sadly.\n
+        I can tell you though that the date and time for ${person} is currently:\n
+        ${date_string}\n
+        I hope that helps clarify the matter for you!
+      `;
+      await tools.github.issues.createComment({
+        owner: owner,
+        repo: repo,
+        issue_number: issue_number,
+        body: responseMsg
       });
     } else {
       // If it is not, formulate a response that lets the questioner know that
