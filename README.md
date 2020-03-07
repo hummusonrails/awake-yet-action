@@ -22,6 +22,7 @@ jobs:
       uses: benhayehudi/awake-yet-action@master
     env:
       GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      GOOGLE_API_KEY: "${{ secrets.GOOGLE_API_KEY }}"
 ```
 
 The last step is you need to add your Google Maps API key to your GitHub repository secrets configuration. Follow [this guide](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) on how to do so. You need to save it with the following key: `GOOGLE_API_KEY`.
