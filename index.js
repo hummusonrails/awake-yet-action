@@ -73,7 +73,7 @@ Toolkit.run(async tools => {
 
       // Initialize the Timezone library and get the timezone with the lat & long from the Geocoder data
       var timestamp = Math.floor((new Date()).getTime() / 1000);
-      var tz = await client.timezone({
+      client.timezone({
         params: {
           location: { 
             lat: `${geocode_data[0]['latitude']}`, 
@@ -81,8 +81,7 @@ Toolkit.run(async tools => {
           },
           timestamp: timestamp
         }
-      });
-      console.log(`tz data: ${JSON.stringify(tz)}`);
+      }).then(d => { console.log(`data: ${JSON.stringify(d)}`) })
 
       // Assign the date and time in the user's location to the date_time variable
       date_time = new Date(tz.local_timestamp * 1000);
