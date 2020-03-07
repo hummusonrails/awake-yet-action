@@ -54,7 +54,7 @@ Toolkit.run(async tools => {
     person_info = (await tools.github.users.getByUsername({
       username: person
     })).data;
-    console.log(`HERE IS THE PERSON INFO: ${JSON.stringify(person_info)}`);
+    console.log(`HERE IS THE PERSON ARRAY INFO: ${JSON.stringify(person_info)}`);
 
     // Get the location specified in their profile
     user_location = person_info.location;
