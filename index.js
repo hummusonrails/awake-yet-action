@@ -44,11 +44,15 @@ Toolkit.run(async tools => {
       body.lastIndexOf('is'),
       body.lastIndexOf('awake?')
     );
+    console.log(`HERE IS THE QUESTION: ${question}`);
     let question_arr = question.split(' ');
+    console.log(`HERE IS THE QUESTION ARRAY: ${question_arr}`);
     person = question_arr[1].replace(/@/g, '');
+    console.log(`HERE IS THE PERSON: ${person}`);
     person_info = (await tools.github.users.getByUsername({
       person
     })).data;
+    console.log(`HERE IS THE PERSON INFO: ${person_info}`);
 
     // Get the location specified in their profile
     user_location = person_info.location;
