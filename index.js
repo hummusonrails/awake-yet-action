@@ -78,9 +78,9 @@ Toolkit.run(async tools => {
       console.log(`GEOCODER CLIENT: ${JSON.stringify(geocoder)}`);
       let geocode_data = (await geocoder.geocode(`${user_location}`));
       console.log(JSON.stringify(geocode_data));
+      console.log('latitude: ' + geocode_data.latitude + 'longitude: ' + geocode_data.longitude)
       // Initialize the Timezone library and get the timezone with the lat & long from the Geocoder data
       let timestamp = 1402629305;
-      Timezone.key(`${process.env.GOOGLE_API_KEY}`);
       let timezone_data = (await Timezone.data(geocode_data.latitude, geocode_data.longitude, timestamp));
 
       // Assign the date and time in the user's location to the date_time variable
