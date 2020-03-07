@@ -84,10 +84,10 @@ Toolkit.run(async tools => {
       }).then(d => { console.log(`data: ${JSON.stringify(d)}`) })
 
       // Assign the date and time in the user's location to the date_time variable
-      date_time = new Date(tz.local_timestamp * 1000);
-      date_string = date_time.toDateString() + ' - ' + date_time.getHours() + ':' + date_time.getMinutes();
-      console.log(tz.local_timestamp)
-      console.log(date_string)
+      // date_time = new Date(tz.local_timestamp * 1000);
+      // date_string = date_time.toDateString() + ' - ' + date_time.getHours() + ':' + date_time.getMinutes();
+      // console.log(tz.local_timestamp)
+      // console.log(date_string)
 
       const responseMsg = `
         Hi there, ${actor}! 👋
