@@ -69,7 +69,7 @@ Toolkit.run(async tools => {
       let options = {
         provider: 'google',
         httpAdapter: 'https',
-        apiKey: secrets.GOOGLE_API_KEY,
+        apiKey: process.env.GOOGLE_API_KEY,
         formatter: null
       };
       // Initialize the Geocoder with the options and get the data
@@ -78,7 +78,7 @@ Toolkit.run(async tools => {
 
       // Initialize the Timezone library and get the timezone with the lat & long from the Geocoder data
       let timestamp = 1402629305;
-      Timezone.key(`${secrets.GOOGLE_API_KEY}`);
+      Timezone.key(`${process.env.GOOGLE_API_KEY}`);
       let timezone_data = (await Timezone.data(geocode_data.latitude, geocode_data.longitude, timestamp));
 
       // Assign the date and time in the user's location to the date_time variable
