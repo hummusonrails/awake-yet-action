@@ -81,7 +81,12 @@ Toolkit.run(async tools => {
           },
           timestamp: timestamp
         }
-      }).then(d => { console.log(`data: ${JSON.stringify(d)}`) })
+      }).then(r => { 
+        console.log(`data: ${JSON.stringify(r)}`); 
+      })
+      .catch(e => {
+        console.log(e);
+      })
 
       // Assign the date and time in the user's location to the date_time variable
       // date_time = new Date(tz.local_timestamp * 1000);
