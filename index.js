@@ -1,6 +1,8 @@
 const { Toolkit } = require('actions-toolkit')
 const { Geocoder } = require('node-geocoder');
 const { Timezone } = require('node-google-timezone');
+const dotenv = require("dotenv");
+dotenv.config();
 // Create variables for future values
 let user = '';
 let person = '';
@@ -67,7 +69,7 @@ Toolkit.run(async tools => {
       let options = {
         provider: 'google',
         httpAdapter: 'https',
-        apiKey: `${secrets.GOOGLE_API_KEY}`,
+        apiKey: secrets.GOOGLE_API_KEY,
         formatter: null
       };
       // Initialize the Geocoder with the options and get the data
