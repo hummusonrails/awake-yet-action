@@ -1,6 +1,6 @@
 const { Toolkit } = require('actions-toolkit')
-const { Geocoder } = require('node-geocoder');
-const { Timezone } = require('node-google-timezone');
+const Geocoder = require('node-geocoder');
+const Timezone = require('node-google-timezone');
 const dotenv = require("dotenv");
 dotenv.config();
 // Create variables for future values
