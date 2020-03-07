@@ -13,7 +13,7 @@ let date_time = '';
 // Run your GitHub Action!
 Toolkit.run(async tools => {
   // Print out the context
-  console.log(tools.context);
+  // console.log(tools.context);
 
   // Assign repo data to variables
   const owner = tools.context.payload.repository.owner.login;
