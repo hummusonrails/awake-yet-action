@@ -3,8 +3,7 @@ const Geocoder = require('node-geocoder');
 const dotenv = require('dotenv');
 dotenv.config();
 const axios = require('axios').default;
-const Client = require("@googlemaps/google-maps-services-js").Client;
-const client = new Client({api_key: process.env.GOOGLE_API_KEY});
+import { inspect } from 'util';
 // Create variables for future values
 var user = '';
 var person = '';
@@ -81,7 +80,7 @@ Toolkit.run(async tools => {
         })
       }
       timeZoneData = (await getTimezoneData()).data;
-      console.log(JSON.stringify(timeZoneData));
+      console.log(util.inspect(timeZoneData));
 
       // Assign the date and time in the user's location to the date_time variable
       // date_time = new Date(tz.local_timestamp * 1000);
