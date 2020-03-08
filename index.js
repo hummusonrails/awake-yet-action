@@ -73,7 +73,7 @@ Toolkit.run(async tools => {
       var geocode_data = (await geocoder.geocode(`${user_location}`));
 
       const getTimezoneData = () => {
-        return axious ({
+        return axios ({
           method: 'get',
           url: `https://maps.googleapis.com/maps/api/timezone/json?location=${geocode_data[0]['latitude']},${geocode_data[0]['longitude']}&timestamp=${timestamp}&key=${process.env.GOOGLE_API_KEY}`
         })
