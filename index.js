@@ -89,7 +89,8 @@ Toolkit.run(async tools => {
       const responseMsg = `
         Hi there, ${actor}! 👋
         \n
-        You asked if ${person} was awake yet. I can't tell you about their personal sleeping habits, sadly.\n
+        You asked if ${person} was awake yet.\n
+        I can't tell you about their personal sleeping habits, sadly.\n
         I can tell you though that the date and time for ${person} is currently:\n
         ${date_string}\n
         I hope that helps clarify the matter for you!
