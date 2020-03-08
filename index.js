@@ -1,7 +1,8 @@
 const { Toolkit } = require('actions-toolkit')
 const Geocoder = require('node-geocoder');
-const dotenv = require("dotenv");
+const dotenv = require('dotenv');
 dotenv.config();
+const axios = require('axios').default;
 const Client = require("@googlemaps/google-maps-services-js").Client;
 const client = new Client({api_key: process.env.GOOGLE_API_KEY});
 // Create variables for future values
@@ -71,22 +72,15 @@ Toolkit.run(async tools => {
       var geocoder = Geocoder(options);
       var geocode_data = (await geocoder.geocode(`${user_location}`));
 
-      // Initialize the Timezone library and get the timezone with the lat & long from the Geocoder data
-      var timestamp = Math.floor((new Date()).getTime() / 1000);
-      client.timezone({
-        params: {
-          location: { 
-            lat: `${geocode_data[0]['latitude']}`, 
-            lng: `${geocode_data[0]['longitude']}`
-          },
-          timestamp: timestamp
-        }
-      }).then(r => { 
-        console.log(`data: ${JSON.stringify(r)}`); 
-      })
-      .catch(e => {
-        console.log(e);
-      })
+      const getTimezoneData = () => {
+        return axious ({
+          method: 'get',
+          url: `https://maps.googleapis.com/maps/api/timezone/json?location=${geocode_data[0]['latitude']},${geocode_data[0]['longitude']}&timestamp=${timestamp}&key=${process.env.GOOGLE_API_KEY}`
+        })
+      }
+
+      timeZoneData = (await getTimezoneData());
+      console.log(JSON.stringify(timeZoneData));
 
       // Assign the date and time in the user's location to the date_time variable
       // date_time = new Date(tz.local_timestamp * 1000);
