@@ -1,10 +1,9 @@
 {
   "name": "awake-yet-action",
   "private": true,
-  "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node -r esm ./index.js",
+    "start": "node ./index.js",
     "test": "jest"
   },
   "dependencies": {
@@ -12,7 +11,6 @@
     "actions-toolkit": "^3.0.1",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
-    "esm": "^3.2.25",
     "node-geocoder": "^3.25.0",
     "util": "^0.12.2"
   },

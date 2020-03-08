@@ -3,7 +3,7 @@ const Geocoder = require('node-geocoder');
 const dotenv = require('dotenv');
 dotenv.config();
 const axios = require('axios').default;
-import { inspect } from 'util';
+const util = require('util');
 // Create variables for future values
 var user = '';
 var person = '';
