@@ -14,7 +14,6 @@ var issue_number = '';
 var date_time = '';
 var date_string = '';
 
-// Run your GitHub Action!
 Toolkit.run(async tools => {
   // Assign repo data to variables
   const owner = tools.context.payload.repository.owner.login;
