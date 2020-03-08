@@ -71,8 +71,10 @@ Toolkit.run(async tools => {
       var geocoder = Geocoder(options);
       var geocode_data = (await geocoder.geocode(`${user_location}`));
 
-
+      // Timestamp of current time in UTC
       var timestamp = Math.floor((new Date()).getTime() / 1000);
+
+      // Get the time zone data from the Google Time Zone API
       const getTimezoneData = () => {
         return axios ({
           method: 'get',
