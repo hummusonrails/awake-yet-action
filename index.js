@@ -80,9 +80,9 @@ Toolkit.run(async tools => {
           url: `https://maps.googleapis.com/maps/api/timezone/json?location=${geocode_data[0]['latitude']},${geocode_data[0]['longitude']}&timestamp=${timestamp}&key=${process.env.GOOGLE_API_KEY}`
         })
       }
-      timeZoneData = (await getTimezoneData());
+      timeZoneData = (await getTimezoneData()).data;
       console.log(JSON.stringify(timeZoneData));
-      
+
       // Assign the date and time in the user's location to the date_time variable
       // date_time = new Date(tz.local_timestamp * 1000);
       // date_string = date_time.toDateString() + ' - ' + date_time.getHours() + ':' + date_time.getMinutes();
