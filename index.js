@@ -1,9 +1,9 @@
 const { Toolkit } = require('actions-toolkit')
 const Geocoder = require('node-geocoder');
-const Client = require("@googlemaps/google-maps-services-js").Client;
-const client = new Client({});
 const dotenv = require("dotenv");
 dotenv.config();
+const Client = require("@googlemaps/google-maps-services-js").Client;
+const client = new Client({api_key: process.env.GOOGLE_API_KEY});
 // Create variables for future values
 var user = '';
 var person = '';
