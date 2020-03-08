@@ -3,7 +3,6 @@ const Geocoder = require('node-geocoder');
 const dotenv = require('dotenv');
 dotenv.config();
 const axios = require('axios').default;
-const util = require('util');
 // Create variables for future values
 var user = '';
 var person = '';
@@ -81,12 +80,11 @@ Toolkit.run(async tools => {
         })
       }
       timeZoneData = (await getTimezoneData()).data;
-      console.log(util.inspect(timeZoneData));
 
       // Assign the date and time in the user's location to the date_time variable
-      date_time = new Date(timestamp + timeZoneData['dstOffset'] + timeZoneData['rawOffset'] * 1000);
+      local_timestamp = timestamp + + timeZoneData['dstOffset'] + timeZoneData['rawOffset'];
+      date_time = new Date(local_timestamp * 1000);
       date_string = date_time.toDateString() + ' - ' + date_time.getHours() + ':' + date_time.getMinutes();
-      console.log(date_string)
 
       const responseMsg = `
         Hi there, ${actor}! 👋
@@ -96,6 +94,7 @@ Toolkit.run(async tools => {
         ${date_string}\n
         I hope that helps clarify the matter for you!
       `;
+      console.log(responseMsg)
       await tools.github.issues.createComment({
         owner: owner,
         repo: repo,
@@ -108,6 +107,7 @@ Toolkit.run(async tools => {
         Sorry, but ${person} did not specify a location in their profile!\n
         I can't look up the time in an undefined location.
       `;
+      console.log(responseMsg)
       await tools.github.issues.createComment({
         owner: owner,
         repo: repo,
