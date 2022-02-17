@@ -9,7 +9,7 @@
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^2.1.2",
     "actions-toolkit": "^3.0.1",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "dotenv": "^8.2.0",
     "node-geocoder": "^3.25.0"
   },
